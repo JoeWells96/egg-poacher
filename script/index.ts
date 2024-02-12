@@ -1,24 +1,31 @@
 window.addEventListener("DOMContentLoaded", () => {
-    const addEggbutton: HTMLElement = document.getElementById('add-egg')
+    const addEggButton: HTMLElement = document.getElementById('add-egg')
     const pan: HTMLElement = document.getElementById('pan')
+    addEggButton.addEventListener('click', addEgg)
 
-    addEggbutton.addEventListener('click', addEgg)
-
-    let eggs: Egg[] = []
-
-    function addEgg() {
+    function addEgg(): void {
         const egg: Egg = new Egg(document.getElementById('time').value, `egg${eggs.length}`)
         eggs.push(egg)
         pan.appendChild(egg.toHtml())
-        setInterval(() => updateEgg(egg), 1000)
-    }
-
-    function updateEgg(egg: Egg): void {
-        const eggLi: HTMLElement = document.getElementById(egg.id)
-        const secondsRemaining: number = egg.updateAndReturnSecondsRemaining()
-        eggLi.textContent = String(secondsRemaining)
+        const intervalId: number = setInterval(() => updateEgg(egg, intervalId), 1000)
     }
 });
+
+let eggs: Egg[] = []
+
+function updateEgg(egg: Egg, intervalId: number): void {
+    const eggLi: HTMLElement = document.getElementById(egg.id)
+    const secondsRemaining: number = egg.updateAndReturnSecondsRemaining()
+    eggLi.textContent = formatSecondsToText(secondsRemaining)
+    if (secondsRemaining == 0) clearInterval(intervalId)
+}
+
+function formatSecondsToText(totalSeconds: number): string {
+    const minutes: number = Math.floor(totalSeconds / 60)
+    const seconds: number = totalSeconds % 60
+    const secondsString: string = seconds < 10 ? `0${seconds}` : `${seconds}`
+    return `${minutes}:${secondsString}`
+}
 
 class Egg {
     secondsRemaining: number;
@@ -38,7 +45,7 @@ class Egg {
     toHtml(): HTMLElement {
         const eggLi: HTMLLIElement = document.createElement('li')
         eggLi.setAttribute('id', this.id)
-        eggLi.textContent = String(this.secondsRemaining)
+        eggLi.textContent = formatSecondsToText(this.secondsRemaining)
         return eggLi
     }
 }
