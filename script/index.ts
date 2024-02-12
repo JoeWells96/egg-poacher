@@ -4,21 +4,41 @@ window.addEventListener("DOMContentLoaded", () => {
 
     addEggbutton.addEventListener('click', addEgg)
 
-    function addEgg() {
-        const time = document.getElementById('time').value
-        const egg = new Egg(time)
-        const eggLi = document.createElement('li');
-        eggLi.textContent = String(egg.secondsRemaining)
+    let eggs: Egg[] = []
 
-        pan.appendChild(eggLi)
+    function addEgg() {
+        const egg: Egg = new Egg(document.getElementById('time').value, `egg${eggs.length}`)
+        eggs.push(egg)
+        pan.appendChild(egg.toHtml())
+        setInterval(() => updateEgg(egg), 1000)
+    }
+
+    function updateEgg(egg: Egg): void {
+        const eggLi: HTMLElement = document.getElementById(egg.id)
+        const secondsRemaining: number = egg.updateAndReturnSecondsRemaining()
+        eggLi.textContent = String(secondsRemaining)
     }
 });
 
 class Egg {
     secondsRemaining: number;
+    id: string;
 
-    constructor(timeText: string) {
-        const time: string[] = timeText.split(':');
+    constructor(timeText: string, id: string) {
+        const time: string[] = timeText.split(':')
         this.secondsRemaining = (Number(time[0]) * 60) + Number(time[1])
+        this.id = id
+    }
+
+    updateAndReturnSecondsRemaining(): number {
+        if (this.secondsRemaining > 0) this.secondsRemaining--
+        return this.secondsRemaining
+    }
+
+    toHtml(): HTMLElement {
+        const eggLi: HTMLLIElement = document.createElement('li')
+        eggLi.setAttribute('id', this.id)
+        eggLi.textContent = String(this.secondsRemaining)
+        return eggLi
     }
 }
