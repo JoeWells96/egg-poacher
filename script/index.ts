@@ -4,7 +4,8 @@ window.addEventListener("DOMContentLoaded", () => {
     addEggButton.addEventListener('click', addEgg)
 
     function addEgg(): void {
-        const egg: Egg = new Egg(document.getElementById('time').value, `egg${eggs.length}`)
+        const timeString: string = (<HTMLInputElement>document.getElementById('time')).value
+        const egg: Egg = new Egg(timeString, `egg${eggs.length}`)
         eggs.push(egg)
         pan.appendChild(egg.toHtml())
         const intervalId: number = setInterval(() => updateEgg(egg, intervalId), 1000)
