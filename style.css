@@ -1,0 +1,10 @@
+.egg {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    display: grid;
+    align-items: center;
+    width: 136px;
+    height: 190px;
+    background: #f5d787;
+    border-radius: 50% 60% 50% 50% / 70% 70% 40% 40%;
+}

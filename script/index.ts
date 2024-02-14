@@ -43,9 +43,10 @@ class Egg {
     }
 
     toHtml(): HTMLElement {
-        const eggLi: HTMLLIElement = document.createElement('li')
-        eggLi.setAttribute('id', this.id)
-        eggLi.textContent = formatSecondsToText(this.secondsRemaining)
-        return eggLi
+        const eggHtml: HTMLElement = document.createElement('div')
+        eggHtml.setAttribute('class', 'egg')
+        eggHtml.setAttribute('id', this.id)
+        eggHtml.textContent = formatSecondsToText(this.secondsRemaining)
+        return eggHtml
     }
 }
