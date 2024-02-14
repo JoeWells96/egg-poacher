@@ -1,5 +1,3 @@
-import {toPx, formatSecondsToText} from './utils';
-
 window.addEventListener("DOMContentLoaded", () => {
     const pan: HTMLElement = document.getElementById('pan')
     document.addEventListener('click', addEgg)

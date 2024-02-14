@@ -6,4 +6,17 @@
     position: absolute;
     background: #f5d787;
     border-radius: 50% 60% 50% 50% / 70% 70% 40% 40%;
+    animation: wiggle 2.5s infinite;
+}
+
+.egg:hover {
+    animation: none;
+}
+
+@keyframes wiggle {
+    0% { transform: rotate(0deg); }
+    80% { transform: rotate(0deg); }
+    85% { transform: rotate(5deg); }
+    95% { transform: rotate(-5deg); }
+    100% { transform: rotate(0deg); }
 }
