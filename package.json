@@ -3,6 +3,6 @@
     "typescript": "^5.3.3"
   },
   "scripts": {
-    "start": "live-server"
+    "start": "tsc -w & live-server"
   }
 }

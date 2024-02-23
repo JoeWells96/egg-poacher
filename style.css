@@ -1,12 +1,22 @@
+body {
+    font-family: "Palatino", Georgia, serif;
+    color: #41381A;
+    background: #669B90;
+}
+
 .egg {
-    font-family: Arial, Helvetica, sans-serif;
+    font-size: 36px;
+    font-weight: bold;
     text-align: center;
     display: grid;
     align-items: center;
     position: absolute;
-    background: #f5d787;
+    border-style: solid;
+    border-width: 4px;
     border-radius: 50% 60% 50% 50% / 70% 70% 40% 40%;
-    animation: wiggle 1s infinite;
+    background: #FFEFCA;
+    border-color: #41381A;
+    /*animation: wiggle_more 1s infinite;*/
 }
 
 .egg:hover {
@@ -14,9 +24,34 @@
 }
 
 @keyframes wiggle {
-    0% { transform: rotate(0deg); }
-    25% { transform: rotate(5deg); }
-    50% { transform: rotate(0deg); }
-    75% { transform: rotate(-5deg); }
-    100% { transform: rotate(0deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+    60% {
+        transform: rotate(0deg);
+    }
+    75% {
+        transform: rotate(5deg);
+    }
+    85% {
+        transform: rotate(-5deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes wiggle_more {
+    0% {
+        transform: rotate(0deg);
+    }
+    33% {
+        transform: rotate(10deg);
+    }
+    66% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(-10deg);
+    }
 }
