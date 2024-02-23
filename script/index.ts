@@ -1,10 +1,23 @@
 window.addEventListener("DOMContentLoaded", () => {
+    const time: HTMLInputElement = <HTMLInputElement>document.getElementById('time')
     const pan: HTMLElement = document.getElementById('pan')
+    const plus: HTMLElement = document.getElementById("plus")
+    const minus: HTMLElement = document.getElementById("minus")
     pan.addEventListener('click', addEgg)
+    plus.addEventListener('click', _ => updateTime(15))
+    minus.addEventListener('click', _ => updateTime(-15))
 
-    function addEgg(event): void {
-        const timeString: string = (<HTMLInputElement>document.getElementById('time')).value
-        const egg: Egg = new Egg(timeString, `egg${eggs.length}`)
+    function updateTime(diff: number): void {
+        const newTime: number = formatTextToSeconds(time.value) + diff
+        if (newTime >= 0) {
+            time.value = formatSecondsToText(newTime, true)
+        } else {
+            time.value = "00:00"
+        }
+    }
+
+    function addEgg(event: MouseEvent): void {
+        const egg: Egg = new Egg(time.value, `egg-${eggs.length}`)
         eggs.push(egg)
         pan.appendChild(egg.toHtml(event.clientX, event.clientY))
         const intervalId: number = setInterval(() => updateEgg(egg, intervalId), 1000)
@@ -27,8 +40,7 @@ class Egg {
     private height: number = 190;
 
     constructor(timeText: string, id: string) {
-        const time: string[] = timeText.split(':')
-        this.secondsRemaining = (Number(time[0]) * 60) + Number(time[1])
+        this.secondsRemaining = formatTextToSeconds(timeText)
         this.id = id
     }
 
