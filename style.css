@@ -19,6 +19,11 @@ body {
     /*animation: wiggle_more 1s infinite;*/
 }
 
+#pan{
+    width: 100%;
+    height: 100vh;
+}
+
 .egg:hover {
     animation: none;
 }

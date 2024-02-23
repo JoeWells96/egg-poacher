@@ -1,6 +1,6 @@
 window.addEventListener("DOMContentLoaded", () => {
     const pan: HTMLElement = document.getElementById('pan')
-    document.addEventListener('click', addEgg)
+    pan.addEventListener('click', addEgg)
 
     function addEgg(event): void {
         const timeString: string = (<HTMLInputElement>document.getElementById('time')).value
