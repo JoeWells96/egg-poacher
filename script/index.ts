@@ -3,7 +3,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const pan: HTMLElement = document.getElementById('pan')
     const plus: HTMLElement = document.getElementById("plus")
     const minus: HTMLElement = document.getElementById("minus")
-    pan.addEventListener('click', addEgg)
+    pan.addEventListener('click', addOrRemoveEgg)
     plus.addEventListener('click', _ => updateTime(15))
     minus.addEventListener('click', _ => updateTime(-15))
 
@@ -16,15 +16,21 @@ window.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    function addEgg(event: MouseEvent): void {
-        const egg: Egg = new Egg(time.value, `egg-${eggs.length}`)
-        eggs.push(egg)
-        pan.appendChild(egg.toHtml(event.clientX, event.clientY))
-        const intervalId: number = setInterval(() => updateEgg(egg, intervalId), 1000)
+    function addOrRemoveEgg(event: MouseEvent): void {
+        const target: HTMLElement = <HTMLElement>event.target
+        if (target.matches(".egg")) {
+            clearInterval(eggsIntervals.get(target.id))
+            target.remove()
+        } else {
+            const egg: Egg = new Egg(time.value, `egg-${eggsIntervals.size}`)
+            pan.appendChild(egg.toHtml(event.clientX, event.clientY))
+            const intervalId: number = setInterval(() => updateEgg(egg, intervalId), 1000)
+            eggsIntervals.set(egg.id, intervalId)
+        }
     }
 });
 
-let eggs: Egg[] = []
+let eggsIntervals: Map<string, number> = new Map<string, number>
 
 function updateEgg(egg: Egg, intervalId: number): void {
     const eggLi: HTMLElement = document.getElementById(egg.id)
@@ -58,6 +64,7 @@ class Egg {
         eggHtml.style.left = toPx(clickX - this.width / 2)
         eggHtml.style.top = toPx(clickY - this.height / 2)
         eggHtml.textContent = formatSecondsToText(this.secondsRemaining)
+        // eggHtml.addEventListener('click', _ => document.getElementById(this.id).remove())
         return eggHtml
     }
 }
