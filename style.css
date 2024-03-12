@@ -16,8 +16,9 @@ body {
     border-radius: 50% 60% 50% 50% / 70% 70% 40% 40%;
     background: #FFEFCA;
     border-color: #41381A;
-    /*animation: wiggle_more 1s infinite;*/
+    animation: wiggle 2s ease 0s infinite normal forwards;
 }
+
 .top-bar {
     display: flex;
     justify-content: center;
@@ -56,39 +57,66 @@ input[type="time"]::-webkit-calendar-picker-indicator {
     display: none;
 }
 
-.egg:hover {
-    animation: none;
-}
-
 @keyframes wiggle {
-    0% {
-        transform: rotate(0deg);
-    }
-    60% {
-        transform: rotate(0deg);
-    }
-    75% {
-        transform: rotate(5deg);
-    }
-    85% {
-        transform: rotate(-5deg);
-    }
+    0%,
     100% {
         transform: rotate(0deg);
+        transform-origin: 50% 50%;
+    }
+
+    10% {
+        transform: rotate(2deg);
+    }
+
+    20%,
+    40%,
+    60% {
+        transform: rotate(-3deg);
+    }
+
+    30%,
+    50%,
+    70% {
+        transform: rotate(3deg);
+    }
+
+    80% {
+        transform: rotate(-2deg);
+    }
+
+    90% {
+        transform: rotate(2deg);
     }
 }
 
 @keyframes wiggle_more {
-    0% {
+    0%,
+    100% {
         transform: rotate(0deg);
+        transform-origin: 50% 50%;
     }
-    33% {
+
+    10% {
+        transform: rotate(8deg);
+    }
+
+    20%,
+    40%,
+    60% {
+        transform: rotate(-10deg);
+    }
+
+    30%,
+    50%,
+    70% {
         transform: rotate(10deg);
     }
-    66% {
-        transform: rotate(0deg);
+
+    80% {
+        transform: rotate(-8deg);
     }
-    100% {
-        transform: rotate(-10deg);
+
+    90% {
+        transform: rotate(8deg);
     }
 }
