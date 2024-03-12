@@ -36,7 +36,10 @@ function updateEgg(egg: Egg, intervalId: number): void {
     const eggLi: HTMLElement = document.getElementById(egg.id)
     const secondsRemaining: number = egg.updateAndReturnSecondsRemaining()
     eggLi.textContent = formatSecondsToText(secondsRemaining)
-    if (secondsRemaining == 0) clearInterval(intervalId)
+    if (secondsRemaining == 0) {
+        clearInterval(intervalId)
+        eggLi.setAttribute('class', 'egg ready')
+    }
 }
 
 class Egg {
@@ -64,7 +67,6 @@ class Egg {
         eggHtml.style.left = toPx(clickX - this.width / 2)
         eggHtml.style.top = toPx(clickY - this.height / 2)
         eggHtml.textContent = formatSecondsToText(this.secondsRemaining)
-        // eggHtml.addEventListener('click', _ => document.getElementById(this.id).remove())
         return eggHtml
     }
 }
