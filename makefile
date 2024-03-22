@@ -3,7 +3,7 @@ dev:
 
 build:
 	tsc
-	mkdir -p site
-	cp -r dist site
-	cp style.css site
-	cp index.html site
+	mkdir -p docs
+	cp -r dist docs
+	cp style.css docs
+	cp index.html docs
