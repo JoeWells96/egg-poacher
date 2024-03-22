@@ -15,6 +15,7 @@ tmp
 
 # Build
 public/css/main.css
+node_modules/
 
 # Coverage reports
 coverage
@@ -32,7 +33,6 @@ Thumbs.db
 
 # Ignore built ts files
 dist/**/*
-site/**/*
 
 # ignore yarn.lock
 yarn.lock
